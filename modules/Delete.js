@@ -5,13 +5,21 @@ let mongoose = require("mongoose");
 mongoose.connect(`${process.env.MONGO}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 function DeleteData(req, res) {
-    // const dataID = 
+    
     const id = req.query.id;
     const email = req.query.email;
 
 
     DataModel.deleteOne({ _id: id }).then(() => {
-        DataModel.find({ email }, (error, AllData) => res.json(AllData));
+        DataModel.find({ email }, (function (error, allData) {
+            if (error) {
+                console.log('Error with getting the data', error);
+            }
+            else {
+                console.log(allData);
+                res.send(allData);
+            }
+        }))
     })
 
 }
