@@ -6,7 +6,7 @@ mongoose.connect
 
 function updateFun(req, res) {
 
-    const { id, title, imageUrl } = req.body;
+    const { id, title, imageUrl ,email} = req.body;
 
     DataModel.findByIdAndUpdate({ id }, { title, imageUrl }, (error, updatedData) => {
 

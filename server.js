@@ -1,14 +1,15 @@
 'use strict'
 require('dotenv').config();
 const express = require('express')
-const server = express();
 const cors = require('cors')
-const axios = require('axios')
+const mongoose = require("mongoose");
+const server = express();
 const PORT = process.env.PORT
 
 server.use(cors());
 server.use(express.json());
-// mongoose.connect('mongodb://localhost:27017/DB_NAME',{ useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`${process.env.MONGO}`, { useNewUrlParser: true, useUnifiedTopology: true });
+
 const getAllData = require('./modules/APIData.js');
 const {addToFav,getFav} = require('./modules/AddToFav');
 const DeleteData  = require('./modules/Delete')
