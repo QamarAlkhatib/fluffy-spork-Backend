@@ -20,7 +20,7 @@ server.get('/AllData', getAllData);
 server.post('/addToFav',addToFav)
 server.get('/getFav',getFav)
 server.delete('/FavDelete',DeleteData)
-server.put('/updateData', update)
+server.put('/updateData/:id', update)
 server.get('*', notFoundHandler);
 
 function homeHandler(req,res){

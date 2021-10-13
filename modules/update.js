@@ -6,16 +6,17 @@ mongoose.connect
 
 function updateFun(req, res) {
 
-    const { id, title, imageUrl ,email} = req.body;
+    const idData = req.params.id;
+    const {title, imageUrl ,email} = req.body;
+    console.log(req.body)
 
-    DataModel.findByIdAndUpdate({ id }, { title, imageUrl }, (error, updatedData) => {
-
+    DataModel.findByIdAndUpdate({ _id:idData }, { title, imageUrl }, (error, updatedData) => {
         if (error) {
             console.log('Error with updating the data', error);
         }
         else {
             console.log(updatedData);
-            bookModal.find({ email }, (function (error, allData) {
+            DataModel.find({ email }, (function (error, allData) {
                 if (error) {
                     console.log('Error with getting the data', error);
                 }
@@ -24,7 +25,7 @@ function updateFun(req, res) {
                     res.send(allData);
                 }
             }))
-            res.send(updatedData);
+            res.json(updatedData);
         }
     })
 }
